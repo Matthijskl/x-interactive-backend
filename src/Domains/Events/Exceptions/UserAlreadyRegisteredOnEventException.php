@@ -2,7 +2,7 @@
 
 namespace App\Domains\Events\Exceptions;
 
-class UserAlreadyRegisteredOnEvent
+class UserAlreadyRegisteredOnEventException extends \Exception
 {
 
 }
