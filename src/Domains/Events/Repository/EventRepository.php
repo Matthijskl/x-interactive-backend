@@ -27,6 +27,17 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return Event[] Returns an array of Event objects which are ordered.
+     */
+    public function getAllOrderedBy(string $orderBy = 'ASC'): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.date', $orderBy)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Event[] Returns an array of Event objects
     //     */

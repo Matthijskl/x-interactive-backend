@@ -34,9 +34,11 @@ final class EventController extends AbstractController
      * @return JsonResponse<Event[]>
      */
     #[Route('/events', name: 'events.index', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $events = $this->eventRepository->getAll();
+        $events = $this->eventRepository->getAllOrderedBy(
+            $request->query->get('orderDirection', 'asc')
+        );
 
         return (new JsonResponse())
             ->setJson(
