@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class EventController extends AbstractController
 {
@@ -46,6 +44,11 @@ final class EventController extends AbstractController
             );
     }
 
+    /**
+     * Get a single event
+     * @throws NonUniqueResultException
+     * @return JsonResponse<Event>
+     */
     #[Route('/events/{id}', name: 'events.show', methods: ['GET'])]
     public function show(Event $event): Response
     {
@@ -58,6 +61,7 @@ final class EventController extends AbstractController
     /**
      * Add a user to an event
      * @throws UserAlreadyRegisteredOnEventException
+     * @return JsonResponse<Event>
      */
     #[Route('/events/add-user/{id}', name: 'events.add-user', methods: ['POST'])]
     public function addUserToEvent(
